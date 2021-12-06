@@ -1,9 +1,17 @@
 import { AppProps } from 'next/app'
-import '@fontsource/kumbh-sans/400.css'
-import '@fontsource/kumbh-sans/700.css'
+import { ThemeProvider } from 'styled-components'
+import { lightTheme } from 'styles/theme'
+import GlobalStyles from 'styles/global'
+import '@fontsource/space-mono/400.css'
+import '@fontsource/space-mono/700.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  )
 }
 
 export default MyApp

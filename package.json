@@ -1,5 +1,5 @@
 {
-  "name": "devjobs",
+  "name": "github-user-search",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@fontsource/kumbh-sans": "^4.5.1",
+    "@fontsource/space-mono": "^4.5.0",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",

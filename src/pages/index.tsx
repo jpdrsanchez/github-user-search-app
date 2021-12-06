@@ -2,7 +2,7 @@ type HomeProps = {
   title: string
 }
 
-const Home = ({ title = 'Home' }: HomeProps) => {
+const Home = ({ title = 'The Octocat' }: HomeProps) => {
   return <div>{title}</div>
 }
 
