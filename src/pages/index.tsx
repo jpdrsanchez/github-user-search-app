@@ -2,6 +2,7 @@ import Button from 'components/Button'
 import Header from 'components/Header'
 import Heading from 'components/Heading'
 import Layout from 'components/Layout'
+import Search from 'components/Search'
 import { IoMoon } from 'react-icons/io5'
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
           DARK
         </Button>
       </Header>
+      <Search />
     </Layout>
   )
 }
