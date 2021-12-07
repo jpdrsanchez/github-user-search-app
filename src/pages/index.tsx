@@ -1,38 +1,7 @@
-import Button from 'components/Button'
-import Heading from 'components/Heading'
-import Text from 'components/Text'
-import { IoMoon } from 'react-icons/io5'
-type HomeProps = {
-  title: string
-}
+import Layout from 'components/Layout'
 
-const Home = ({ title = 'The Octocat' }: HomeProps) => {
-  return (
-    <div>
-      <p>{title}</p>
-      <Button>Search</Button>
-      <Button
-        background="none"
-        hover="none"
-        spacing={2.5}
-        color="gray"
-        colorHover="logo"
-        weight="bold"
-        icon={<IoMoon />}
-        size="xsmall"
-      >
-        DARK
-      </Button>
-      <Heading level={1}>H1 Title</Heading>
-      <Heading level={2}>H2 Title</Heading>
-      <Heading level={3}>H3 Title</Heading>
-      <Heading level={4}>H4 Title</Heading>
-      <Text>Default Text Test Component</Text>
-      <Text size="large" lineHeight={1.4} align="center">
-        Default Text Test Component
-      </Text>
-    </div>
-  )
+const Home = () => {
+  return <Layout>content</Layout>
 }
 
 export default Home
