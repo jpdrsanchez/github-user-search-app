@@ -33,8 +33,9 @@ export const lightTheme: DefaultTheme = {
     xsmall: '.8125rem',
     small: '.9375rem',
     medium: '1rem',
-    large: '1.375rem',
-    xlarge: '1.625rem'
+    large: '1.125rem',
+    xlarge: '1.375rem',
+    xxlarge: '1.625rem'
   },
   spacings: {
     xxsmall: '.4375rem',

@@ -15,13 +15,13 @@ export const Heading = styled.h1.attrs<HeadingProps>(({ level }) => ({
       case 1:
         return css`
           color: ${theme.colors[color]};
-          font-size: ${theme.sizes.xlarge};
+          font-size: ${theme.sizes.xxlarge};
           font-weight: ${theme.font.weight.bold};
         `
       case 2:
         return css`
           color: ${theme.colors[color]};
-          font-size: ${theme.sizes.large};
+          font-size: ${theme.sizes.xlarge};
           font-weight: ${theme.font.weight.bold};
         `
       case 3:

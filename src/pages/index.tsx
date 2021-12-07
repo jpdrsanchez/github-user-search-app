@@ -1,5 +1,6 @@
 import Button from 'components/Button'
 import Heading from 'components/Heading'
+import Text from 'components/Text'
 import { IoMoon } from 'react-icons/io5'
 type HomeProps = {
   title: string
@@ -26,6 +27,10 @@ const Home = ({ title = 'The Octocat' }: HomeProps) => {
       <Heading level={2}>H2 Title</Heading>
       <Heading level={3}>H3 Title</Heading>
       <Heading level={4}>H4 Title</Heading>
+      <Text>Default Text Test Component</Text>
+      <Text size="large" lineHeight={1.4} align="center">
+        Default Text Test Component
+      </Text>
     </div>
   )
 }
