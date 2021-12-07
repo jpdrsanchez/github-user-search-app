@@ -7,7 +7,7 @@ type HeadingProps = {
   size?: keyof typeof lightTheme.sizes
 }
 
-export const Heading = styled.h1.attrs<HeadingProps>(({ level }) => ({
+export const Heading = styled.h1.attrs<HeadingProps>(({ level = 1 }) => ({
   as: `h${level}`
 }))<HeadingProps>`
   ${({ color = 'black', level = 1, theme }) => {
