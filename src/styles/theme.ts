@@ -10,8 +10,11 @@ export const lightTheme: DefaultTheme = {
     logo: '#222731',
     blueGray: '#4B6A9B',
     blueGrayOpacity: 'rgba(75, 106, 155, 0.5)',
-    gray: 'rgba(75, 106, 155, 0.75)',
-    red: '#f74646'
+    gray: '#697C9A',
+    grayOpacity: 'rgba(75, 106, 155, 0.75)',
+    red: '#f74646',
+    white: '#fff',
+    none: 'none'
   },
   container: {
     small: '20.5rem',
@@ -26,7 +29,8 @@ export const lightTheme: DefaultTheme = {
     }
   },
   sizes: {
-    xxsmall: '.8125rem',
+    xxsmall: '.625rem',
+    xsmall: '.8125rem',
     small: '.9375rem',
     medium: '1rem',
     large: '1.375rem',
@@ -56,6 +60,9 @@ export const darkTheme: DefaultTheme = {
     blueGray: '#fff',
     blueGrayOpacity: 'rgba(255, 255, 255, .5)',
     gray: '#fff',
-    red: '#f74646'
+    grayOpacity: '#fff',
+    red: '#f74646',
+    white: '#fff',
+    none: 'none'
   }
 }

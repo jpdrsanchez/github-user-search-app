@@ -13,6 +13,9 @@ declare module 'styled-components' {
       blueGray: string
       blueGrayOpacity: string
       red: string
+      white: string
+      none: string
+      grayOpacity: string
     }
     container: {
       small: string
@@ -31,6 +34,7 @@ declare module 'styled-components' {
     }
     sizes: {
       xxsmall: string
+      xsmall: string
       small: string
       medium: string
       large: string
