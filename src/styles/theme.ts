@@ -14,7 +14,9 @@ export const lightTheme: DefaultTheme = {
     grayOpacity: 'rgba(75, 106, 155, 0.75)',
     red: '#f74646',
     white: '#fff',
-    none: 'none'
+    none: 'none',
+    shadow: 'rgba(70, 96, 187, 0.198567)',
+    buttonHover: '#222731'
   },
   container: {
     small: '20.5rem',
@@ -64,6 +66,8 @@ export const darkTheme: DefaultTheme = {
     grayOpacity: '#fff',
     red: '#f74646',
     white: '#fff',
-    none: 'none'
+    none: 'none',
+    shadow: 'none',
+    buttonHover: '#90A4D4'
   }
 }

@@ -1,4 +1,4 @@
-import { ReactNode, ReactText } from 'react'
+import { MouseEventHandler, ReactNode, ReactText } from 'react'
 import { lightTheme } from 'styles/theme'
 import * as S from './styles'
 
@@ -17,6 +17,7 @@ type ButtonProps = {
   gap?: keyof typeof lightTheme.sizes
   spacing?: number
   weight?: keyof typeof lightTheme.font.weight
+  onClick?: MouseEventHandler
 }
 
 const Button = ({ children, ...props }: ButtonProps) => {

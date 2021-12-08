@@ -5,18 +5,24 @@ type HeadingProps = {
   color?: keyof typeof lightTheme.colors
   level?: 1 | 2 | 3 | 4
   size?: keyof typeof lightTheme.sizes
+  responsive?: boolean
+  as?: keyof JSX.IntrinsicElements
 }
 
-export const Heading = styled.h1.attrs<HeadingProps>(({ level = 1 }) => ({
-  as: `h${level}`
+export const Heading = styled.h1.attrs<HeadingProps>(({ level = 1, as }) => ({
+  as: as ? as : `h${level}`
 }))<HeadingProps>`
-  ${({ color = 'black', level = 1, theme }) => {
+  ${({ color = 'black', level = 1, responsive = true, theme }) => {
     switch (level) {
       case 1:
         return css`
           color: ${theme.colors[color]};
-          font-size: ${theme.sizes.xxlarge};
+          font-size: ${responsive ? theme.sizes.medium : theme.sizes.xxlarge};
           font-weight: ${theme.font.weight.bold};
+
+          @media (min-width: 40em) {
+            font-size: ${theme.sizes.xxlarge};
+          }
         `
       case 2:
         return css`
@@ -27,8 +33,12 @@ export const Heading = styled.h1.attrs<HeadingProps>(({ level = 1 }) => ({
       case 3:
         css`
           color: ${theme.colors[color]};
-          font-size: ${theme.sizes.medium};
+          font-size: ${responsive ? theme.sizes.xsmall : theme.sizes.medium};
           font-weight: ${theme.font.weight.normal};
+
+          @media (min-width: 40em) {
+            font-size: ${theme.sizes.medium};
+          }
         `
         break
       case 4:

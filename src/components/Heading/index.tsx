@@ -7,6 +7,7 @@ type HeadingProps = {
   level?: 1 | 2 | 3 | 4
   color?: keyof typeof lightTheme.colors
   size?: keyof typeof lightTheme.sizes
+  as?: keyof JSX.IntrinsicElements
 }
 
 const Heading = ({ children, ...props }: HeadingProps) => {

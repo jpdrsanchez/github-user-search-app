@@ -28,6 +28,7 @@ const GlobalStyles = createGlobalStyle`
 
     a {
       color: ${theme.colors.blueGray};
+      text-decoration: none;
     }
   `}
 `

@@ -16,6 +16,8 @@ declare module 'styled-components' {
       white: string
       none: string
       grayOpacity: string
+      shadow: string
+      buttonHover: string
     }
     container: {
       small: string

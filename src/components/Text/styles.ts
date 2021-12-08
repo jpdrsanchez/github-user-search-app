@@ -20,9 +20,13 @@ export const Text = styled.p<TextProps>`
   }) =>
     css`
       color: ${theme.colors[color]};
-      font-size: ${theme.sizes[size]};
+      font-size: ${theme.sizes.xsmall};
       font-weight: ${theme.font.weight[weight]};
       line-height: ${lineHeight};
       text-align: ${align};
+
+      @media (min-width: 40em) {
+        font-size: ${theme.sizes[size]};
+      }
     `}
 `

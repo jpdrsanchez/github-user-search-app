@@ -6,13 +6,14 @@ export const Search = styled.form`
     padding: ${theme.spacings.xxsmall};
     border-radius: ${theme.sizes.small};
     margin-bottom: ${theme.spacings.medium};
+    box-shadow: 0 1rem 1.875rem -0.625rem ${theme.colors.shadow};
 
     @media (min-width: 40em) {
       padding: ${theme.spacings.xsmall};
       margin-bottom: ${theme.spacings.large};
     }
   `}
-  box-shadow: 0 1rem 1.875rem -.625rem rgba(70, 96, 187, 0.198567);
+
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -38,6 +39,7 @@ export const SearchInput = styled.input`
   ${({ theme }) => css`
     color: ${theme.colors.logo};
     font-size: ${theme.sizes.xsmall};
+    background: none;
 
     &::placeholder {
       color: ${theme.colors.blueGray};
