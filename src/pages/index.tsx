@@ -1,4 +1,6 @@
+import Avatar from 'components/Avatar'
 import Button from 'components/Button'
+import Content from 'components/Content'
 import Header from 'components/Header'
 import Heading from 'components/Heading'
 import Layout from 'components/Layout'
@@ -24,6 +26,12 @@ const Home = () => {
         </Button>
       </Header>
       <Search />
+      <Content>
+        <Avatar
+          src="https://avatars.githubusercontent.com/u/1?v=4"
+          alt="Profile Image of Tom Preston-Werner"
+        />
+      </Content>
     </Layout>
   )
 }
