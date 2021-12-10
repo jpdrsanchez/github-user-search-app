@@ -60,4 +60,9 @@ export const Button = styled.button.attrs<ButtonProps>(({ type }) => ({
   span {
     font-size: 1.25rem;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: ${({ theme }) => theme.colors.blueHover};
+  }
 `

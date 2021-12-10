@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 export const Search = styled.form`
   ${({ theme }) => css`
@@ -17,6 +17,7 @@ export const Search = styled.form`
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
+  position: relative;
 `
 
 export const SearchIcon = styled.div`
@@ -56,4 +57,26 @@ export const SearchInput = styled.input`
   text-overflow: ellipsis;
   display: block;
   width: 100%;
+`
+
+const show = keyframes`
+  to {
+    opacity: 1;
+  }
+`
+
+export const SearchError = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0.625rem;
+  opacity: 0;
+  pointer-events: none;
+  animation: ${show} 0.5s forwards;
+  transform: translateY(-1px);
+
+  @media (min-width: 40em) {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8.75rem;
+  }
 `

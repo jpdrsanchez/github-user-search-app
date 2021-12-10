@@ -5,14 +5,13 @@ import Header from 'components/Header'
 import Heading from 'components/Heading'
 import HeadingInfo from 'components/HeadingInfo'
 import Layout from 'components/Layout'
-import Loading from 'components/Loading'
 import NumbersInfo from 'components/NumbersInfo'
 import Search from 'components/Search'
 import Text from 'components/Text'
 import ToggleMode from 'components/ToggleMode'
 import { format } from 'date-fns'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useCallback, useEffect, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
 import { getUser } from 'services/api'
 import { get, set } from 'services/mode'
 import { ThemeProvider } from 'styled-components'
@@ -48,8 +47,11 @@ const Home = ({ data, color_mode }: PageProps) => {
   const [userData, setUserData] = useState<UserDataType>(data)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [name, setName] = useState('')
 
   const getUserData = useCallback(async (name = 'octocat') => {
+    setLoading(true)
+    setError(false)
     try {
       const response: UserDataType = await getUser(name)
       setUserData(response)
@@ -68,79 +70,80 @@ const Home = ({ data, color_mode }: PageProps) => {
     set(mode)
   }, [mode])
 
-  useEffect(() => {
-    return error
-  }, [error])
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    getUserData(name)
+  }
 
   return (
     <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
       <Layout>
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            <Header>
-              <Heading color="logo">devfinder</Heading>
-              <ToggleMode
-                mode={mode}
-                changeMode={() => {
-                  setMode(prevMode => toggleMode(prevMode))
-                }}
-              />
-            </Header>
-            <Search />
-            <Content>
-              <Avatar
-                src={userData.avatar_url}
-                alt={`${userData?.name || userData.login} profile avatar`}
-              />
-              <HeadingInfo>
-                <div>
-                  <div>
-                    <Heading color="black">
-                      {userData?.name || userData.login}
-                    </Heading>
-                    <a
-                      href={`https://github.com/${userData.login}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      @{userData.login}
-                    </a>
-                  </div>
-                  <Text lineHeight={1.46}>
-                    {format(
-                      new Date(userData.created_at || ''),
-                      "'Joined' dd MMM yyyy"
-                    )}
-                  </Text>
-                </div>
-                <Text hasText={!!userData?.bio}>
-                  {userData?.bio || 'This profile has no bio'}
-                </Text>
-              </HeadingInfo>
-              <Text hasText={!!userData?.bio}>
-                {userData?.bio || 'This profile has no bio'}
+        <Header>
+          <Heading color="logo">devfinder</Heading>
+          <ToggleMode
+            mode={mode}
+            changeMode={() => {
+              setMode(prevMode => toggleMode(prevMode))
+            }}
+          />
+        </Header>
+        <Search
+          value={name}
+          setValue={setName}
+          onSubmit={handleSubmit}
+          error={error}
+          loading={loading}
+        />
+        <Content>
+          <Avatar
+            src={userData.avatar_url}
+            alt={`${userData?.name || userData.login} profile avatar`}
+          />
+          <HeadingInfo>
+            <div>
+              <div>
+                <Heading color="black">
+                  {userData?.name || userData.login}
+                </Heading>
+                <a
+                  href={`https://github.com/${userData.login}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @{userData.login}
+                </a>
+              </div>
+              <Text lineHeight={1.46}>
+                {format(
+                  new Date(userData.created_at || ''),
+                  "'Joined' dd MMM yyyy"
+                )}
               </Text>
-              <NumbersInfo
-                numbers={{
-                  repos: userData.public_repos,
-                  followers: userData.followers,
-                  following: userData.following
-                }}
-              />
-              <AdditionalInfo
-                data={{
-                  blog: userData?.blog,
-                  location: userData?.location,
-                  org: userData?.company,
-                  twitter: userData?.twitter_username
-                }}
-              />
-            </Content>
-          </>
-        )}
+            </div>
+            <Text hasText={!!userData?.bio}>
+              {userData?.bio || 'This profile has no bio'}
+            </Text>
+          </HeadingInfo>
+          <Text hasText={!!userData?.bio}>
+            {userData?.bio || 'This profile has no bio'}
+          </Text>
+          <NumbersInfo
+            numbers={{
+              repos: userData.public_repos,
+              followers: userData.followers,
+              following: userData.following
+            }}
+          />
+          <AdditionalInfo
+            data={{
+              blog: userData?.blog,
+              location: userData?.location,
+              org: userData?.company,
+              twitter: userData?.twitter_username
+            }}
+          />
+        </Content>
       </Layout>
     </ThemeProvider>
   )

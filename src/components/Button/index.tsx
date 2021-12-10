@@ -18,9 +18,20 @@ type ButtonProps = {
   spacing?: number
   weight?: keyof typeof lightTheme.font.weight
   onClick?: MouseEventHandler
+  disabled?: boolean
+  isLoading?: boolean
+  loadingText?: string
 }
 
 const Button = ({ children, ...props }: ButtonProps) => {
+  if (props.isLoading)
+    return (
+      <S.Button {...props}>
+        {props.loadingText}
+        {!!props.icon && <span>{props.icon}</span>}
+      </S.Button>
+    )
+
   return (
     <S.Button {...props}>
       {children}
