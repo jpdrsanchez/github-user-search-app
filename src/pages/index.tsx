@@ -11,6 +11,7 @@ import Search from 'components/Search'
 import Text from 'components/Text'
 import ToggleMode from 'components/ToggleMode'
 import { format } from 'date-fns'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useCallback, useEffect, useState } from 'react'
 import { getUser } from 'services/api'
 import { get, set } from 'services/mode'
@@ -35,12 +36,17 @@ type UserDataType = {
   company: string | null
 }
 
+type PageProps = {
+  data: UserDataType
+  color_mode: ModeProps
+}
+
 const toggleMode = (mode: string) => (mode === 'light' ? 'dark' : 'light')
 
-const Home = () => {
-  const [mode, setMode] = useState('')
-  const [userData, setUserData] = useState<UserDataType | null>(null)
-  const [loading, setLoading] = useState(true)
+const Home = ({ data, color_mode }: PageProps) => {
+  const [mode, setMode] = useState(color_mode)
+  const [userData, setUserData] = useState<UserDataType>(data)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
   const getUserData = useCallback(async (name = 'octocat') => {
@@ -59,21 +65,12 @@ const Home = () => {
   }, [getUserData])
 
   useEffect(() => {
-    console.log(error)
-  }, [error])
-
-  useEffect(() => {
-    const modeValue = get()
-    if (!modeValue) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-        setMode('dark')
-      else setMode('light')
-    } else setMode(get())
-  }, [])
-
-  useEffect(() => {
     set(mode)
   }, [mode])
+
+  useEffect(() => {
+    return error
+  }, [error])
 
   return (
     <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
@@ -95,26 +92,26 @@ const Home = () => {
             <Search />
             <Content>
               <Avatar
-                src={userData?.avatar_url}
-                alt={`${userData?.name || userData?.login} profile avatar`}
+                src={userData.avatar_url}
+                alt={`${userData?.name || userData.login} profile avatar`}
               />
               <HeadingInfo>
                 <div>
                   <div>
                     <Heading color="black">
-                      {userData?.name || userData?.login}
+                      {userData?.name || userData.login}
                     </Heading>
                     <a
-                      href={`https://github.com/${userData?.login}`}
+                      href={`https://github.com/${userData.login}`}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      @{userData?.login}
+                      @{userData.login}
                     </a>
                   </div>
                   <Text lineHeight={1.46}>
                     {format(
-                      new Date(userData?.created_at || ''),
+                      new Date(userData.created_at || ''),
                       "'Joined' dd MMM yyyy"
                     )}
                   </Text>
@@ -128,9 +125,9 @@ const Home = () => {
               </Text>
               <NumbersInfo
                 numbers={{
-                  repos: userData?.public_repos || 0,
-                  followers: userData?.followers || 0,
-                  following: userData?.following || 0
+                  repos: userData.public_repos,
+                  followers: userData.followers,
+                  following: userData.following
                 }}
               />
               <AdditionalInfo
@@ -147,6 +144,29 @@ const Home = () => {
       </Layout>
     </ThemeProvider>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const color_mode = get(context)
+
+  try {
+    const data: UserDataType = await getUser('octocat')
+    return {
+      props: {
+        data,
+        color_mode: color_mode
+      }
+    }
+  } catch {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: true
+      }
+    }
+  }
 }
 
 export default Home

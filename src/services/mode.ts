@@ -1,8 +1,11 @@
+import { GetServerSidePropsContext } from 'next'
+import nookies, { setCookie } from 'nookies'
+
 export const set = (value: string) => {
-  window.localStorage.setItem('color_mode', value)
+  setCookie(null, 'color_mode', value)
 }
 
-export const get = () => {
-  const colorMode = window.localStorage.getItem('color_mode')
-  return colorMode || 'light'
+export const get = (ctx: GetServerSidePropsContext) => {
+  const { color_mode } = nookies.get(ctx)
+  return color_mode || 'light'
 }
