@@ -8,6 +8,7 @@ type TextProps = {
   size?: keyof typeof lightTheme.sizes
   lineHeight?: number
   align?: 'center' | 'left' | 'right'
+  hasText?: boolean
 }
 
 const Text = ({ children, ...props }: TextProps) => {

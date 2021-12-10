@@ -37,6 +37,7 @@ export const AdditionalItem = styled.li.attrs<AdditionalItemProps>(
       empty ? theme.colors.blueGrayOpacity : theme.colors.blueGray};
     font-size: 0.8125rem;
     line-height: 1.46;
+    word-break: break-all;
 
     @media (min-width: 40em) {
       font-size: 0.9375rem;

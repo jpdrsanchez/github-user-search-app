@@ -7,6 +7,7 @@ type TextProps = {
   lineHeight?: number
   align?: 'center' | 'left' | 'right'
   weight?: keyof typeof lightTheme.font.weight
+  hasText?: boolean
 }
 
 export const Text = styled.p<TextProps>`
@@ -16,10 +17,11 @@ export const Text = styled.p<TextProps>`
     size = 'small',
     lineHeight = '1.67',
     align = 'left',
-    weight = 'normal'
+    weight = 'normal',
+    hasText = true
   }) =>
     css`
-      color: ${theme.colors[color]};
+      color: ${hasText ? theme.colors[color] : theme.colors.grayOpacity};
       font-size: ${theme.sizes.xsmall};
       font-weight: ${theme.font.weight[weight]};
       line-height: ${lineHeight};
