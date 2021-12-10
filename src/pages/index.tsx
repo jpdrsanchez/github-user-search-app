@@ -13,7 +13,7 @@ import { format } from 'date-fns'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { FormEvent, useCallback, useEffect, useState } from 'react'
 import { getUser } from 'services/api'
-import { get, set } from 'services/mode'
+import { clientGet, get, set } from 'services/mode'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import { darkTheme, lightTheme } from 'styles/theme'
@@ -67,7 +67,18 @@ const Home = ({ data, color_mode }: PageProps) => {
   }, [getUserData])
 
   useEffect(() => {
-    set(mode)
+    if (!clientGet()) {
+      setMode(
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+      )
+      set(
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+      )
+    } else set(mode)
   }, [mode])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
